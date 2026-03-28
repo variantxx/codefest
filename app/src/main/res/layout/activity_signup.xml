@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".MainActivity">
+    android:gravity="center"
+    tools:context=".SignupActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NotesToGO"
+        android:text="New Account"
         android:textSize="32sp"
         android:textColor="@color/black"
         android:textStyle="bold"/>
@@ -44,10 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#2196F3"
-        android:text="New Account"/>
-
-
-
+        android:text="Already Have Account?"/>
 
 
 </LinearLayout>
