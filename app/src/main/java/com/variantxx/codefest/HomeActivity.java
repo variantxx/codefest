@@ -11,7 +11,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     DBHandler dbHandler;
@@ -47,6 +46,12 @@ public class HomeActivity extends AppCompatActivity {
             Intent i = new Intent(this, NoteAddScreenActivity.class);
             startActivity(i);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayListView();
     }
 
     private void displayListView() {
