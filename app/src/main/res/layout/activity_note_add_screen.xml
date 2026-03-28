@@ -6,8 +6,38 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_margin="24dp"
     tools:context=".NoteAddScreenActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Notes"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/title_Input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:padding="24dp"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/content_Input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Content"
+        android:padding="24dp"
+        android:layout_marginBottom="24dp"/>
+    <Button
+        android:id="@+id/add_Note_List_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"/>
 
 
 
