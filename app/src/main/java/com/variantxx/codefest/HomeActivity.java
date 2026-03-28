@@ -43,17 +43,20 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        // Display data to list view.
-        listView.setAdapter(arrayAdapter);
-        int userId = sharedPref.getInt("userId", -1);
-        List<Note> notes = dbHandler.getNotesByUser(userId);
-        arrayList.clear();
-        arrayList.addAll(notes);
+        displayListView();
 
         addNoteBtn.setOnClickListener(v -> {
             Intent i = new Intent(this, NoteAddScreenActivity.class);
             startActivity(i);
         });
+    }
+
+    private void displayListView() {
+        listView.setAdapter(arrayAdapter);
+        int userId = sharedPref.getInt("userId", -1);
+        List<Note> notes = dbHandler.getNotesByUser(userId);
+        arrayList.clear();
+        arrayList.addAll(notes);
     }
 
 }
