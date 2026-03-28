@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     EditText emailInput, passwordInput;
     Button loginBtn;
+    TextView newAccBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.login_email_input);
         passwordInput = findViewById(R.id.login_password_input);
         loginBtn = findViewById(R.id.login_btn);
+        newAccBtn = findViewById(R.id.new_account_btn);
 
         initialize();
     }
@@ -56,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(i);
             }
+        });
+
+        newAccBtn.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, SignupActivity.class);
+            startActivity(i);
         });
     }
 }
