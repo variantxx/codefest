@@ -81,6 +81,20 @@ public class DBHandler extends SQLiteOpenHelper {
         return notes;
     }
 
+    public int getUserIdByEmail(String email) {
+        int id = -1;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT id FROM users WHERE email = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") int userId = cursor.getInt(cursor.getColumnIndex("id"));
+            id = userId;
+        }
+        cursor.close();
+        db.close();
+        return id;
+    }
+
 
     // Add a new note for a specific user.
     public void addNote(int userId, String title, String content) {
