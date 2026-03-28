@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private void initialize() {
         // Initialize the database handler.
         dbHandler.getWritableDatabase();
-
-        // Handle user login
         loginBtn.setOnClickListener(v -> {
             String email = emailInput.getText().toString();
             String password = passwordInput.getText().toString();
@@ -52,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Invalid email or password!", Toast.LENGTH_SHORT).show();
             }else {
                 // Mark user as logged in.
+                int userId = dbHandler.getUserIdByEmail(email);
                 SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("userId", userId);
                 editor.putString("userEmail", email);
                 editor.apply();
                 // Navigate to main screen.
