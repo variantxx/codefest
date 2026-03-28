@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "CodeFestDB";
     private static final int DB_VERSION = 1;
@@ -33,6 +35,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(createNotesTable);
     }
 
+
+    // USERS METHODS
     public void addUser(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         String insertUser = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
@@ -40,14 +44,29 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addNote(int userId, String title, String content) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String insertNote = "INSERT INTO notes (user_id, title, content) VALUES (?, ?, ?)";
-        db.execSQL(insertNote, new Object[]{userId, title, content});
+
+    public ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM users";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
+            @SuppressLint("Range") String username = cursor.getString(cursor.getColumnIndex("username"));
+            @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex("email"));
+            @SuppressLint("Range") String password = cursor.getString(cursor.getColumnIndex("password"));
+            users.add(new User(id, username, email, password));
+        }
+        cursor.close();
         db.close();
+        return users;
     }
 
-    public void getNotesByUser(int userId) {
+
+    // NOTES METHODS
+    // Get all notes for a specific user.
+    public ArrayList<Note> getNotesByUser(int userId) {
+        ArrayList<Note> notes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM notes WHERE user_id = ?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
@@ -56,10 +75,40 @@ public class DBHandler extends SQLiteOpenHelper {
             @SuppressLint("Range") int ownerId = cursor.getInt(cursor.getColumnIndex("user_id"));
             @SuppressLint("Range") String title = cursor.getString(cursor.getColumnIndex("title"));
             @SuppressLint("Range") String content = cursor.getString(cursor.getColumnIndex("content"));
+            notes.add(new Note(id, ownerId, title, content));
         }
         cursor.close();
         db.close();
+        return notes;
     }
+
+
+    // Add a new note for a specific user.
+    public void addNote(int userId, String title, String content) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String insertNote = "INSERT INTO notes (user_id, title, content) VALUES (?, ?, ?)";
+        db.execSQL(insertNote, new Object[]{userId, title, content});
+        db.close();
+    }
+
+
+    // Update an existing note by its ID.
+    public void updateNote(int noteId, String title, String content) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String updateNote = "UPDATE notes SET title = ?, content = ? WHERE id = ?";
+        db.execSQL(updateNote, new Object[]{title, content, noteId});
+        db.close();
+    }
+
+
+    // Delete a note by its ID.
+    public void deleteNote(int noteId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String deleteNote = "DELETE FROM notes WHERE id = ?";
+        db.execSQL(deleteNote, new Object[]{noteId});
+        db.close();
+    }
+
 
     public boolean checkUser(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -71,9 +120,11 @@ public class DBHandler extends SQLiteOpenHelper {
         return exists;
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS users");
             onCreate(db);
     }
+
 }
