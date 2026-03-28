@@ -45,14 +45,19 @@ public class NoteAddScreenActivity extends AppCompatActivity {
             String content = contentInput.getText().toString();
 
             if (!title.isEmpty() && !content.isEmpty()) {
-                int userId = sharedPref.getInt("user_id", -1);
+                int userId = sharedPref.getInt("userId", -1);
                 if (userId != -1) {
                     dbHandler.addNote(userId, title, content);
                     Toast.makeText(this, "Note added successfully!", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(this, HomeActivity.class);
+                    finish();
+                }else {
+                    Toast.makeText(this, "User not found. Please log in again.", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(this, MainActivity.class);
                     startActivity(i);
+                    finish();
                 }
-                finish();
+            }else {
+                Toast.makeText(this, "Please fill in both fields.", Toast.LENGTH_SHORT).show();
             }
         });
     }

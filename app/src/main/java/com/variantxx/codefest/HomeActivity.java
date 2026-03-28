@@ -16,8 +16,8 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
     DBHandler dbHandler;
     SharedPreferences sharedPref;
-    ArrayList<Note> arrayList;
-    NoteViewAdapter arrayAdapter;
+    ArrayList<Note> notes;
+    NoteViewAdapter noteAdapter;
     ListView listView;
     Button addNoteBtn;
 
@@ -33,8 +33,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         dbHandler = new DBHandler(this);
-        arrayList = new ArrayList<>();
-        arrayAdapter = new NoteViewAdapter(this, arrayList);
         addNoteBtn = findViewById(R.id.home_add_note_btn);
         listView = findViewById(R.id.listView);
         sharedPref = getSharedPreferences("CodeFestPref", MODE_PRIVATE);
@@ -52,11 +50,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void displayListView() {
-        listView.setAdapter(arrayAdapter);
         int userId = sharedPref.getInt("userId", -1);
-        List<Note> notes = dbHandler.getNotesByUser(userId);
-        arrayList.clear();
-        arrayList.addAll(notes);
+        notes = new ArrayList<>();
+        notes = dbHandler.getNotesByUser(userId);
+        noteAdapter = new NoteViewAdapter(this, notes);
+        listView.setAdapter(noteAdapter);
     }
 
 }
