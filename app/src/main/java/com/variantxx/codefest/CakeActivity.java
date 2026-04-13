@@ -1,6 +1,8 @@
 package com.variantxx.codefest;
 
 import android.os.Bundle;
+import android.widget.GridView;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +10,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class CakeActivity extends AppCompatActivity {
+
+    DBHandler dbHandler;
+    GridView gridView;
+    ArrayList<Cake> cakes;
+    CakeViewAdapter cakeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +29,26 @@ public class CakeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        dbHandler = new DBHandler(this);
+        gridView = findViewById(R.id.grid_view);
+
+        initialize();
+    }
+
+    private void initialize() {
+        displayGridView();
+    }
+
+     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void displayGridView() {
+       cakes = new ArrayList<>();
+       cakes = dbHandler.getAllCakes();
+       cakeAdapter = new CakeViewAdapter(this, cakes);
+       gridView.setAdapter(cakeAdapter);
     }
 }
