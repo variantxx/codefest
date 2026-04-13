@@ -141,6 +141,24 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    public ArrayList<Cake> getAllCakes() {
+        ArrayList<Cake> cakes = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM cakes";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
+            @SuppressLint("Range") String thumbnail = cursor.getString(cursor.getColumnIndex("thumbnail"));
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
+            @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
+            cakes.add(new Cake(id, thumbnail, name, description));
+        }
+        cursor.close();
+        db.close();
+        return cakes;
+    }
+
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS users");
