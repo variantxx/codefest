@@ -28,9 +28,8 @@ public class CakeViewAdapter extends ArrayAdapter<Cake> {
         }
         Cake currentNumberPosition = getItem(position);
 
-//        ImageView thumbnail = currentItemView.findViewById(R.id.cake_thumbnail);
-//        thumbnail.setImageURI(currentNumberPosition.getThumbnail());
-
+        ImageView thumbnail = currentItemView.findViewById(R.id.cake_thumbnail);
+        thumbnail.setImageURI(currentNumberPosition.getThumbnail());
         TextView cakeTitle = currentItemView.findViewById(R.id.cake_title);
         cakeTitle.setText(currentNumberPosition.getName());
         TextView cakeDescription = currentItemView.findViewById(R.id.cake_description);

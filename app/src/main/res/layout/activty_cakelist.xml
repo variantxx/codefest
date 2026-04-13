@@ -6,7 +6,8 @@
 
     <ImageView
         android:id="@+id/cake_thumbnail"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
         android:layout_height="150dp"
         android:src="@drawable/ic_launcher_background"/>
 

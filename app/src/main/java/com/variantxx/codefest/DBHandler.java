@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -148,7 +150,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
-            @SuppressLint("Range") String thumbnail = cursor.getString(cursor.getColumnIndex("thumbnail"));
+            @SuppressLint("Range") Uri thumbnail = Uri.parse(cursor.getString(cursor.getColumnIndex("thumbnail")));
             @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
             @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
             cakes.add(new Cake(id, thumbnail, name, description));
