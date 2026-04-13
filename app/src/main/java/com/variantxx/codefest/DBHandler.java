@@ -30,8 +30,15 @@ public class DBHandler extends SQLiteOpenHelper {
                 "content TEXT NOT NULL," +
                 "FOREIGN KEY(user_id) REFERENCES users(id)" +
                 ")";
+        String createCakesTable = "CREATE TABLE IF NOT EXISTS cakes (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "thumbnail Text NOT NULL," +
+                "name TEXT NOT NULL," +
+                "description TEXT NOT NULL" +
+                ")";
         db.execSQL(createUsersTable);
         db.execSQL(createNotesTable);
+        db.execSQL(createCakesTable);
     }
 
 
@@ -137,6 +144,8 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS users");
+        db.execSQL("DROP TABLE IF EXISTS notes");
+        db.execSQL("DROP TABLE IF EXISTS cakes");
         onCreate(db);
     }
 

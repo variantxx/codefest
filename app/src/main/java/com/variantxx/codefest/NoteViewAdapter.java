@@ -19,13 +19,15 @@ public class NoteViewAdapter extends ArrayAdapter<Note> {
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View currentItemView = convertView;
         if (currentItemView == null) {
-            currentItemView = LayoutInflater.from(getContext()).inflate(R.layout.activtiy_notelist, parent, false);
+            currentItemView = LayoutInflater.from(getContext())
+                    .inflate(R.layout.activtiy_notelist, parent, false);
         }
         Note currentNumberPosition = getItem(position);
         TextView title = currentItemView.findViewById(R.id.textview1);
         title.setText(currentNumberPosition.getTitle());
         TextView content = currentItemView.findViewById(R.id.textview2);
         content.setText(currentNumberPosition.getContent());
+
         return currentItemView;
     }
 }
