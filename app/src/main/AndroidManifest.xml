@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeFest">
         <activity
+            android:name=".AddCakeActivity"
+            android:exported="false" />
+        <activity
             android:name=".CakeActivity"
             android:exported="false" />
         <activity
