@@ -35,6 +35,7 @@ public class CakeActivity extends AppCompatActivity {
 
         dbHandler = new DBHandler(this);
         gridView = findViewById(R.id.grid_view);
+        addCakeButton = findViewById(R.id.add_cake_btn);
 
         initialize();
     }
@@ -42,14 +43,15 @@ public class CakeActivity extends AppCompatActivity {
     private void initialize() {
         displayGridView();
         addCakeButton.setOnClickListener(v ->{
-            Intent intent = new Intent(this, AddCakeActivity.class);
-            startActivity(intent);
+            Intent i = new Intent(this, AddCakeActivity.class);
+            startActivity(i);
         });
     }
 
      @Override
     protected void onResume() {
         super.onResume();
+        displayGridView();
     }
 
     private void displayGridView() {
