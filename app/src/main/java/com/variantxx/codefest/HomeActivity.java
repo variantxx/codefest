@@ -20,6 +20,8 @@ public class HomeActivity extends AppCompatActivity {
     ListView listView;
     Button addNoteBtn;
 
+    Button cakeBtm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
 
         dbHandler = new DBHandler(this);
         addNoteBtn = findViewById(R.id.home_add_note_btn);
+        cakeBtm = findViewById(R.id.cake_btn);
         listView = findViewById(R.id.listView);
         sharedPref = getSharedPreferences("CodeFestPref", MODE_PRIVATE);
 
@@ -44,6 +47,10 @@ public class HomeActivity extends AppCompatActivity {
 
         addNoteBtn.setOnClickListener(v -> {
             Intent i = new Intent(this, NoteAddScreenActivity.class);
+            startActivity(i);
+        });
+        cakeBtm.setOnClickListener(v -> {
+            Intent i = new Intent(this, CakeActivity.class);
             startActivity(i);
         });
     }
