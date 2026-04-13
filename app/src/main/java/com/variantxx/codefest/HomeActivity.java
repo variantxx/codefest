@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
 
         dbHandler = new DBHandler(this);
         addNoteBtn = findViewById(R.id.home_add_note_btn);
-        cakeBtm = findViewById(R.id.cake_btn);
+        cakeBtm = findViewById(R.id.homeCake_btn);
         listView = findViewById(R.id.listView);
         sharedPref = getSharedPreferences("CodeFestPref", MODE_PRIVATE);
 

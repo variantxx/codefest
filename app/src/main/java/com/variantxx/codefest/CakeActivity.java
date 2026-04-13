@@ -20,7 +20,7 @@ public class CakeActivity extends AppCompatActivity {
     GridView gridView;
     ArrayList<Cake> cakes;
     CakeViewAdapter cakeAdapter;
-    Button addCakeButton;
+    Button AddCakeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +35,17 @@ public class CakeActivity extends AppCompatActivity {
 
         dbHandler = new DBHandler(this);
         gridView = findViewById(R.id.grid_view);
-        addCakeButton = findViewById(R.id.add_cake_btn);
+        AddCakeButton = findViewById(R.id.add_cake_btn);
+
+
+
 
         initialize();
     }
 
     private void initialize() {
         displayGridView();
-        addCakeButton.setOnClickListener(v ->{
+        AddCakeButton.setOnClickListener(v ->{
             Intent i = new Intent(this, AddCakeActivity.class);
             startActivity(i);
         });
