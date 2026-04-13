@@ -1,6 +1,8 @@
 package com.variantxx.codefest;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -18,6 +20,7 @@ public class CakeActivity extends AppCompatActivity {
     GridView gridView;
     ArrayList<Cake> cakes;
     CakeViewAdapter cakeAdapter;
+    Button addCakeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,10 @@ public class CakeActivity extends AppCompatActivity {
 
     private void initialize() {
         displayGridView();
+        addCakeButton.setOnClickListener(v ->{
+            Intent intent = new Intent(this, AddCakeActivity.class);
+            startActivity(intent);
+        });
     }
 
      @Override
