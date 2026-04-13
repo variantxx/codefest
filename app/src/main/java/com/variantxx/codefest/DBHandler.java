@@ -158,6 +158,13 @@ public class DBHandler extends SQLiteOpenHelper {
         return cakes;
     }
 
+    public void addCake(String thumbnail, String name, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String insertCake = "INSERT INTO cakes (thumbnail, name, description) VALUES (?, ?, ?)";
+        db.execSQL(insertCake, new Object[]{thumbnail, name, description});
+        db.close();
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
